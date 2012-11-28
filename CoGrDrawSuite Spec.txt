@@ -1,0 +1,203 @@
+CoGrDrawSuite
+Functional Specification
+Phil Quinn and Kyle Billemeyer
+v.1
+
+Overview
+
+    The purpose of this drawing program is to provide users with a set of tools
+    in which to do primitive drawings.  This specification will provide a detailed
+    description of the functions that our program will contain and how the user will 
+    interact with said functions.    
+
+
+Scenarios
+    
+Ben Fogerty:
+
+Ben is a 19 year old young adult who likes to draw pictures of people doing silly things 
+like playing fighting games and reading manga and then posting those pictures on his favorite 
+fighting games website, Shoryuken, to make e-friends.  Since he has no artistic talent he doesn't 
+care that his pictures are very bad.  What interests him most is the ability to draw quickly so that 
+he can make as many e-friends as possible.  Ben decides to use his roommates new program, The CoGrDrawSuite 
+because he hopes it will meet his needs.  Upon use he finds that it is quite easy to draw things, and he can
+ save his pictures to a web suitable format.  Ben makes many e-friends.
+
+Philip-Kyle Billquinn:
+
+Philip-Kyle (PK for short) is a very enigmatic young designer who loves to draw technical 
+sketches of his brilliant new software designs.  He wants a program that can allow him to 
+draw simple GUI designs for prototype/functional specifications type documents.  PK does not 
+believe in MS Paint so he looks for 3rd party software and finds The CoGrDrawSuite.  It allows
+him to draw simple windows using the predetermined shape tools, dramatically cutting down his 
+design time while still maintaining a crisp (albeit simple) look.
+
+
+Non Goals
+
+Our goal is to keep our program from becoming a highly technical drawing program, such as 
+Adobe Photoshop or AutoCAD. We'd like to provide a limited set of functions, to allow for
+ease of use and learnability.  
+
+Some features that will not be included are:
+* Gradients
+* Animation
+
+The CoGrDrawSuite Layout
+The attached is a sketch of what the user interface may look like, highlighting the program's 
+features. This sketch will be what the user sees upon opening the program.
+
+Functionality Specification
+Note: Actual look of each function is subject to future change. But the functionality should remain the same.
+
+I. Program
+    A. Menu Bar
+        i. File
+            a. new
+            b. export
+            c. exit
+        ii. Options
+            a. frame size
+            b. clear frame
+            c. background color
+            d. cut
+            e. copy
+            f. paste
+        iii. Help
+            a. Instructions
+            b. About
+    B. Tool Bar 
+        i. selection tool
+        ii. shapes
+        iii. ruler tool
+        iv. delete tool
+        v. color tool
+        vi. stroke slider
+        vii. fill type
+    C. Status Bar      
+
+
+Program
+A. Menu Bar - This is the bar that contains the basic meta-options for the program that deal
+              with the frames/instancing options. Will appear as a standard menu bar.
+    
+	i. File - Sub Menu containing the new, open, export, and exit functions. 
+                  Will appear as a  drop down menu.
+
+		a. new - Creates a new instance of a frame in the main window.
+			 Defaults to last set frame size and background color.
+			 If the program has just been opened it will set to 400x400
+			 pixels with a white background.
+        
+		b. export - Saves the contents of the users currently selected frame
+			  as a file type supported by web browsers(.jpg). 
+
+		c. exit - Closes the application and presents a confirmation window 
+			  containing a yes and a no button. 
+
+	ii. Options - This is the bar that contains the options controlling frame/drawing
+		      properties and functions such as frame size, frame clear, background
+                      color, etc. 
+
+		a. frame size - Prompts the user with a window containing two fields labeled
+                                height and width. These will change the height and width of 
+                                the currently selected frame to what the user inputs.
+
+		b. clear frame - Prompts the user with a confirmation window containing yes 
+			         and no buttons. If the user selects yes, then the currently 
+                                 selected frame will be wiped of all shapes contained within 
+                                 it. If the user selects no, then the window disappears with
+                                 no effect.
+
+                c. background color - Prompts the user with a color select window. When the user
+				      picks a color, it changes the background color of the currently
+			              selected frame to that color. Presents an error message box if
+				      no frame is selected. 
+
+		d. cut   - Removes the currently selected shape from the frame and copies it to
+			   the clipboard. The shape can be readded to any frame when the user 
+			   pastes it.
+
+		e. copy - Makes a copy of the currently selected shape and puts it on the clipboard.
+			  The shape can be duplicated repeatedly every time the user calls the paste function.
+		
+		f. paste - Pastes whatever is on the clipboard to the currently selected frame. If nothing
+			   is on the clipboard or if no frames are selected, then nothing happens.
+
+
+	iii. Help - This is a sub bar of the menu bar that contains Instruction and About within
+                    a drop down menu
+
+		a. Instructions - Will link to an HTML file that contains detailed instructions
+                                  on how to operate CoGrDrawingSuite. More than likely it will
+                                  just be this specification.
+
+		b. About - Will link to another HTML file that will give information about the
+                           program. (i.e. version number, authors, etc.)
+
+B. Tool Bar - This is a window displaying a button layout. Each button will be mapped to a specific
+              function of the program. Will be a combination of modal and non-modal functions.
+
+	i. selection tool - It's a toggle button that when pressed will allow the user to pick
+                            a shape. This shape will then be selected and other operations
+                            requiring selection may be performed on it. In order to deselect a 
+                            shape you click anywhere else in the frame. To exit selection mode,
+                            the button must be toggled off. The shape will be selected if the 
+                            left mouse button is pressed down anywhere within the boundaries of
+                            the shape. If two or more shapes are overlapping, then top most shape 
+                            will be initially selected but the other shapes can be shifted through
+                            using the space bar. It also allows the movement of shapes by clicking 
+			    a shape and dragging it to the desired position. It also allows rotation
+			    when the shift key is held while the mouse is being dragged. When the
+                            user moves the mouse left, the shape rotates counter-clockwise. when the
+			    user moves the mouse right, the shape rotates clockwise.
+
+	ii. shapes -  A series of buttons, each linked to a certain specific shape functions:
+			o Line - Creates a line from the first mouse selected point to the
+                                 second mouse selected point. Attributes are stroke and color.
+			o Circle - Creates a circle with the center at the first mouse 
+                                   selected point and the radius as the distance from the
+                                   center to the second mouse selected point. Attributes
+                                   are fill, fill color, stroke, and stroke color.
+			o Ellipse - Creates an ellipse with the top left corner of the
+                                    bounding rectangle at the first mouse selected point
+                                    and the bottom right corner of the bounding rectangle
+                                    at the second mouse selected point. Attributes are fill,
+                                    fill color, stroke, and stroke color. 
+			o Rectangle - Creates a rectangle with upper left corner at the
+                                      first mouse selected point and the upper right corner
+                                      and the second mouse selected point. Attributes are fill,
+                                      fill color, stroke, and stroke color.
+
+	iii. ruler - The ruler tool measures the distance between two points.  These points are
+                    two consecutive mouse clicks on the frame.  The result is the pixel length
+                    between the two points displayed on the status bar.
+	
+	iv. delete - The delete tool toggles delete mode. When delete mode is active, the user
+		     can delete a shape by clicking on it. If the user clicks on multiple shapes
+		     at once, then all the shapes are deleted.
+
+	v. color tool - Prompts the user with a popup window that allows them to select a color.
+			The color of the currently selected shape is changed to whatever color
+                        the user selected.
+    
+	vi. stroke slider - A slider on the tool bar from 0-20 that controls the stroke of currently
+                            selected shape object. If the slider is set to 0, there will be no stroke.
+
+	vii. fill type - A single check button that controls the fill of shapes. If a shape is selected,
+			 this button will control the fill of that shape. It also changes the value of
+			 future shapes, i.e. if it's selected when you create a shape, the shape will
+			 be filled.
+
+C. Status Bar - The status bar will be displayed as the standard status bar of any given window
+                application.  This bar will show the current mouse location within a frame as
+                a pixel coordinate.   
+
+
+
+
+
+
+
+
+
