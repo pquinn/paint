@@ -3,40 +3,55 @@
  * @author Phil Quinn & Kyle Billemeyer
  */
 
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.geom.*;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Shape;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
+import java.beans.PropertyVetoException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Random;
-import javax.swing.*;
+import java.util.Iterator;
 
-import javax.swing.*; 
-import javax.swing.event.*; 
-import javax.swing.text.*; 
-import javax.swing.border.*; 
-import javax.swing.colorchooser.*; 
-import javax.swing.filechooser.*; 
-import javax.accessibility.*; 
-
-import java.awt.*; 
-import java.awt.event.*; 
-import java.beans.*; 
-import java.util.*; 
-import java.io.*; 
-import java.applet.*; 
-import java.net.*; 
-
-import javax.swing.JInternalFrame;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JColorChooser;
 import javax.swing.JDesktopPane;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JSlider;
+import javax.swing.JToggleButton;
 import javax.swing.KeyStroke;
-import javax.swing.RootPaneContainer;
-
-import java.awt.event.*;
-import java.awt.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 
 public class CoGr extends JFrame implements ActionListener,
@@ -654,13 +669,15 @@ public class CoGr extends JFrame implements ActionListener,
     
     /** makes an ImageIcon from the specified path */
     protected static ImageIcon createImageIcon(String path) {
-    	java.net.URL imgURL = CoGr.class.getResource(path);
-    	if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
+    	//java.net.URL imgURL = CoGr.class.getResource(path);
+    	try {
+    		URL imgURL = new URL("file://" + System.getProperty("user.dir") + "/CoGrDraw/" + path);
+    		return new ImageIcon(imgURL);
+    	}
+    	catch (Exception e) {
+    		System.err.println("Couldn't find file: " + path);
+    		throw new RuntimeException(e.getMessage());
+    	}
     }
     
     /** handles events when the mouse is clicked */
